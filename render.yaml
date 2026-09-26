@@ -1,0 +1,29 @@
+# Render Infrastructure Blueprint for Render Hybrid Cache System
+# Reference: https://render.com/docs/blueprint-spec
+
+services:
+  # Web Service running FastAPI / Flask API with Hybrid Render Caching
+  - type: web
+    name: render-hybrid-cache-api
+    env: python
+    region: oregon
+    plan: starter
+    buildCommand: pip install -e .[redis] fastapi uvicorn
+    startCommand: uvicorn examples.fastapi_ssr_demo:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: render-cache-redis
+          property: connectionString
+      - key: FIREBASE_SERVICE_ACCOUNT_PATH
+        value: firebase-service-account.json
+
+  # Managed Redis Instance for Distributed Tier 2 Cache
+  - type: redis
+    name: render-cache-redis
+    region: oregon
+    plan: starter
+    ipAllowList: [] # Access restricted to internal web services only

@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "render-hybrid-cache"
+version = "1.0.0"
+description = "A high-performance, multi-tier hybrid caching system for BaaS and HTML/JSON render pipelines."
+readme = "README.md"
+authors = [
+    { name = "Developer", email = "dev@example.com" }
+]
+license = { text = "MIT" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Database",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+]
+requires-python = ">=3.8"
+dependencies = []
+
+[project.optional-dependencies]
+redis = ["redis>=4.0.0"]
+test = ["pytest>=7.0.0", "pytest-asyncio>=0.20.0"]
+
+[project.urls]
+"Homepage" = "https://github.com/example/render-hybrid-cache"
+"Bug Tracker" = "https://github.com/example/render-hybrid-cache/issues"
